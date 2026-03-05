@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kube-cost-lite"
+version = "0.1.0"
+description = "Small, transparent Kubernetes cost estimator based on resource requests (and optionally usage)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "kube-cost-lite contributors" }
+]
+dependencies = [
+  "typer[all]>=0.12.3",
+  "kubernetes>=29.0.0",
+  "rich>=13.0.0",
+  "pyyaml>=6.0.0",
+  "pydantic>=2.6.0",
+  "fastapi>=0.111.0",
+  "uvicorn[standard]>=0.29.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+]
+
+[project.scripts]
+kube-cost-lite = "kube_cost_lite.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kube-cost-lite-report
+  namespace: kube-system
+spec:
+  schedule: "0 2 * * *" # Daily at 02:00
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: default
+          restartPolicy: OnFailure
+          containers:
+            - name: kube-cost-lite
+              image: kube-cost-lite:0.1.0
+              imagePullPolicy: IfNotPresent
+              command: ["kube-cost-lite", "report", "--output", "table"]
+
